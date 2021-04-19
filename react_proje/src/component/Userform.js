@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Usertable from "./Usertable"
 
+
 export default class Userform extends Component {
     state = {
         username: "",
@@ -10,20 +11,12 @@ export default class Userform extends Component {
     
       save=(event)=>{
         event.preventDefault();
-        //alert(event.username);
-        //let cart= this.state.user
-        //cart.push({user:event.target.value})
-        //this.setState({username:event.target.value})
+        
         let name= event.target.name;
         let value=event.target.value;
         
         this.setState({[name]:value});
-        //alert(this.state.username);
-        //alert(this.state1.username)
-        //document.getElementById
-       //let a= document.getElementById("name")
-       //this.setState({username:a});
-       //console.log(cart)
+        
     }
     
 
@@ -44,6 +37,8 @@ export default class Userform extends Component {
                 
         
                 <Usertable username={this.state.username} usersurname={this.state.usersurname} userdate={this.state.userdate}></Usertable>
+                
+                
             </div>
         )
     }
