@@ -1,5 +1,5 @@
 import './App.css';
-import Userform from "./component/Userform"
+import UserForm from "./component/UserForm"
 import React, { Component } from 'react'
 
 
@@ -11,7 +11,7 @@ export default class App extends Component {
     return (
       <div>
         
-        <Userform></Userform>
+        <UserForm></UserForm>
         
 
       </div>

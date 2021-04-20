@@ -1,82 +1,58 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
-export default class Usertable extends Component {
-    state = {
-        user: [
-
-        ],
-        search1: ""
-
-    };
-    change = (event) => {
-        if (this.props.username === "" || this.props.usersurname === "" || this.props.userdate === "") {
-            alert("tüm boşlukları doldurun")
-        }
-        else {
-            let cart = this.state.user
-            let random = Math.random() * 100
-            //console.log(random)
-            cart.push({
-                userName: this.props.username, ıd: random, userSurname: this.props.usersurname, userDate: this.props.userdate
-            })
-            //console.log(cart)
-            this.setState({ user: cart })
-        }
-        
-
+export default class UserTable extends Component {
+  
+  state = {
+    searchKeyword: "",
+  };
+  
+  onChangeSearchInput = e => {
+    this.setState({ searchKeyword: e.target.value });
+  };
+  
+  deleteConfirm = selectedIndex => {
+    if (window.confirm("Are you want to sure?")) {
+      this.props.deleteUser(selectedIndex)
     }
-    searchbar = (event) => {
-        this.setState({ search1: event.target.value })
+  };
 
-    }
-    delete = (event) => {
-        if (window.confirm("silmek istiyormusunuz")) {
-            console.log(event)
+  filterUsers = val => {
+    return val.userName.toLowerCase().includes(this.state.searchKeyword.toLowerCase())
+  }
 
-            let newıd = this.state.user.filter(a => a.ıd !== event.ıd);
-            console.log(newıd)
-            this.setState({ user: newıd })
-        }
-
-    }
-    render() {
-
-
-        return (
-            <div>
-
-                <button onClick={this.change}>change1</button><br />
-                <input onChange={this.searchbar}></input>
-                <table>
-
-                    <thead>
-                        <tr>
-                            <th>Firstname</th>
-                            <th>Lastname</th>
-                            <th>date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.user.filter((val) => {
-                            console.log(typeof (this.state.search1))
-                            if (this.search1 == "") {
-                                return val
-                            } else if (val.userName.toLowerCase().includes(this.state.search1.toLowerCase())) {
-                                return val
-                            }
-                        }
-                        ).map(user => (
-                            <tr key={user.ıd}>
-                                <th>{user.userName}</th>
-                                <th>{user.userSurname}</th>
-                                <th>{user.userDate}</th>
-                                <th><button onClick={() => this.delete(user)}>X</button></th>
-                            </tr>
-
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-        )
-    }
+  renderUserRow = (user, index) => {
+    return (
+      <tr key={index}>
+        <th>{user.userName}</th>
+        <th>{user.userSurname}</th>
+        <th>{user.userDate}</th>
+        <th>
+          <button onClick={() => this.deleteConfirm(index)}>X</button>
+        </th>
+      </tr>
+    )
+  }
+  
+  render() {
+    return (
+      <div>
+        <input placeholder="Search User" onChange={this.onChangeSearchInput}></input>
+        <table>
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.props.users
+              .filter(this.filterUsers)
+              .map(this.renderUserRow)
+            }
+          </tbody>
+        </table>
+      </div>
+    );
+  }
 }
