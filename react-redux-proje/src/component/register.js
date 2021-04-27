@@ -8,7 +8,7 @@ import * as AddAction from "../redux/actions/AddAction"
 class register extends Component {
     componentDidMount() {
         
-        this.props.action.getCategories("name")
+        
         this.props.name1.dispatch(this.props.action.add("sarper"))
     }
     
@@ -45,7 +45,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         action: {
-            getCategories: bindActionCreators(categoryActions.changeCategory, dispatch),
+            
             add: bindActionCreators(AddAction.Addname, dispatch)
         }
     }
