@@ -4,10 +4,13 @@ import { Switch } from 'react-router-dom';
 import Notfound from "./component/Notfound";
 import Anasayfa from "./component/Anasayfa";
 import Profilgüncelle from "./component/Profilgüncelle";
-import register from "./component/register";
+import Register from "./component/Register";
+
+
 function App() {
   
-    
+  
+  
 
   return (
     <div>
@@ -16,7 +19,7 @@ function App() {
         
         <Route exact path="/" component={Anasayfa}></Route>
         <Route exact path="/Profilgüncelle" component={Profilgüncelle}></Route>
-        {<Route exact path="/register" component={register}></Route>}
+        <Route exact path="/register" component={Register}></Route>
         <Route component={Notfound}></Route>
       </Switch>
 
